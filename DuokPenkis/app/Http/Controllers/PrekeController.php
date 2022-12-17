@@ -29,7 +29,7 @@ class PrekeController extends Controller
      */
     public function create()
     {
-        //
+        return view('Preke.create');
     }
 
     /**
@@ -40,7 +40,22 @@ class PrekeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Preke::create([
+            'pavadinimas' => $request->pavadinimas,
+            'kaina' => $request->kaina,
+            'aprasymas' => $request->aprasymas,
+            'kiekis' => $request->kiekis,
+            'dydis' => $request->dydis,
+            'prekiniszenklas' => $request->prekiniszenklas,
+            'spalva' => $request->spalva,
+            'lytis' => $request->lytis,
+            'bukle' => $request->bukle,
+            'medziagos_tipas' => $request->medziagos_tipas,
+            'nuotauka' => $this->storeImage($request)
+        ]);
+
+        return redirect( route('preke.index'));
     }
 
     /**
@@ -65,7 +80,9 @@ class PrekeController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view(('preke.edit'), [
+            'preke' => Preke::where('id', $id)->first()
+        ]);
     }
 
     /**
@@ -77,7 +94,11 @@ class PrekeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Preke::where('id', $id)->update($request->except([
+            '_token', '_method'
+        ]));
+
+        return redirect(route('preke.index'));
     }
 
     /**
@@ -88,6 +109,15 @@ class PrekeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Preke::destroy($id);
+        return redirect(route('preke.index'))->with('message', 'Prekė sėkmingai ištrinta');
+    }
+
+    private function storeImage($request)
+    {
+        $newImageName = uniqid() . '-' . $request->pavadinimas . '.' .
+        $request->nuotauka->extension();
+
+        return $request->nuotauka->move('images', $newImageName) ;
     }
 }

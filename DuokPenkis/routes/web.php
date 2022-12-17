@@ -34,22 +34,22 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::prefix('/blog')->group(function() {
-    Route::get('/', [KategorijaController::class, 'index'])->name('blog.index');
-    Route::get('/{id}', [KategorijaController::class, 'show'])->name('blog.show');
-    Route::get('/create', [KategorijaController::class, 'create'])->name('blog.create');
-    Route::post('/', [KategorijaController::class, 'store'])->name('blog.store');
-    Route::get('/edit/{id}', [KategorijaController::class, 'edit'])->name('blog.edit');
-    Route::patch('/{id}', [KategorijaController::class, 'update'])->name('blog.update');
-    Route::delete('/{id}', [KategorijaController::class, 'destroy'])->name('blog.destroy');
+Route::prefix('/kategorija')->group(function() {    
+    Route::get('/create', [KategorijaController::class, 'create'])->name('kategorija.create');
+    Route::get('/', [KategorijaController::class, 'index'])->name('kategorija.index');
+    Route::get('/{id}', [KategorijaController::class, 'show'])->name('kategorija.show');
+    Route::post('/', [KategorijaController::class, 'store'])->name('kategorija.store');
+    Route::get('/edit/{id}', [KategorijaController::class, 'edit'])->name('kategorija.edit');
+    Route::patch('/{id}', [KategorijaController::class, 'update'])->name('kategorija.update');
+    Route::delete('/{id}', [KategorijaController::class, 'destroy'])->name('kategorija.destroy');
 });
 
 
 //Route::resource('blog', KategorijaController::class);
 Route::prefix('/')->group(function() {
+    Route::get('/create', [PrekeController::class, 'create'])->name('preke.create');
     Route::get('/', [PrekeController::class, 'index'])->name('preke.index');
     Route::get('/{id}', [PrekeController::class, 'show'])->name('preke.show');
-    Route::get('/create', [PrekeController::class, 'create'])->name('preke.create');
     Route::post('/', [PrekeController::class, 'store'])->name('preke.store');
     Route::get('/edit/{id}', [PrekeController::class, 'edit'])->name('preke.edit');
     Route::patch('/{id}', [PrekeController::class, 'update'])->name('preke.update');

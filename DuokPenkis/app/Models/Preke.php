@@ -10,6 +10,18 @@ class Preke extends Model
     use HasFactory;
 
     protected $table = 'Preke';
-    // protected $primaryKey = 'pavadinimas';
-
+    public $timestamps = false;
+    protected $fillable =[
+            'pavadinimas',
+            'kaina',
+            'aprasymas',
+            'kiekis',
+            'dydis',
+            'prekiniszenklas',
+            'spalva',
+            'lytis',
+            'bukle',
+            'medziagos_tipas',
+            'nuotauka'
+    ];
 }
