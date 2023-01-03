@@ -1,3 +1,3 @@
 # DuokPenkis
-ISP modulio programos būda
+ISP modulio programos projektas
 
